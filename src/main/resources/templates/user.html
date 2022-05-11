@@ -4,8 +4,35 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-
+<h1><span th:text="${#authentication.getPrincipal().getUsername()}"></span>, welcome spring boot security page!</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${#authentication.getPrincipal().getId()}"></td>
+        <td th:text="${#authentication.getPrincipal().getFirstName()}"></td>
+        <td th:text="${#authentication.getPrincipal().getLastName()}"></td>
+        <td th:text="${#authentication.getPrincipal().getAge()}"></td>
+        <td th:text="${#authentication.getPrincipal().getEmail()}"></td>
+        <td th:each="authority : ${#authentication.getAuthorities()}"
+           th:if="${authority.getAuthority().startsWith('ROLE_')}"
+           th:text="${authority.getAuthority().replaceFirst('ROLE_', '')}">
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 
 </body>
 </html>
