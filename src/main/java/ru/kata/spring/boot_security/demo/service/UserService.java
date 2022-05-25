@@ -122,6 +122,6 @@ public class UserService implements UserDetailsService {
     @Transactional(readOnly = true)
     public User findUserById(Long id) {
         Optional<User> userFromDb = userRepository.findById(id);
-        return userFromDb.orElse(new User());
+        return userFromDb.orElse(null);
     }
 }

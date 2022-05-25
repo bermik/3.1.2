@@ -83,6 +83,13 @@ public class User implements UserDetails {
         return getRoles();
     }
 
+    public String getSimpleRoles() {
+        StringBuilder sb = new StringBuilder();
+        for (Role role : roles) {
+            sb.append(role.toString()).append(" ");
+        }
+        return roles.toString();
+    }
     @Override
     public String getUsername() {
         return username;
